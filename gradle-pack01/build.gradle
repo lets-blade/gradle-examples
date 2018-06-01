@@ -1,0 +1,11 @@
+archivesBaseName = 'gradle-pack01'
+mainClassName = 'com.bladejava.pack01.Pack01Application'
+
+jar {
+    from {
+        configurations.runtime.collect{zipTree(it)}
+    }
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
