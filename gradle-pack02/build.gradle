@@ -1,13 +1,11 @@
 archivesBaseName = 'gradle-pack02'
 mainClassName = 'com.bladejava.pack02.Pack02Application'
+def libPath = 'build/libs/lib'
 
 sourceSets {
     main {
-        java {
-            srcDirs = ['src/main/java']
-        }
         resources {
-            srcDirs = ['src/main/resources']
+            exclude '*'
         }
     }
 }
@@ -15,21 +13,23 @@ sourceSets {
 jar {
     manifest {
         attributes 'Main-Class': mainClassName
+        attributes 'Built-By': 'biezhi'
+        attributes 'Class-Path': 'resources/ ' + configurations.compile.collect { 'lib/'+it.getName() }.join(' ')
     }
 }
 
 task clearJar(type: Delete) {
-    delete 'build/libs/lib'
+    delete libPath
 }
 
 task copyJar(type: Copy) {
     from configurations.runtime
-    into('build/libs/lib')
+    into(libPath)
 }
 
 task copyResources(type: Copy) {
-//    from 'build/resources/main'
-//    into('build/libs/resources')
+    from 'src/main/resources'
+    into('build/libs/resources')
 }
 
 task release(type: Copy, dependsOn: [build, clearJar, copyJar, copyResources])
