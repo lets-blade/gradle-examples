@@ -31,7 +31,7 @@ subprojects {
 
     dependencies {
         compile(
-                'com.bladejava:blade-mvc:2.0.8-SNAPSHOT'
+                'com.bladejava:blade-mvc:2.0.12.ALPHA'
         )
 
         testCompile(
