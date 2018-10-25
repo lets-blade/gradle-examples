@@ -9,7 +9,7 @@ import com.blade.Blade;
 public class Pack01Application {
 
     public static void main(String[] args) {
-        Blade.me().get("/", ((request, response) -> response.html("<h1>Hello Blade Pack01.</h1>"))).start(Pack01Application.class, args);
+        Blade.of().get("/", ctx -> ctx.html("<h1>Hello Blade Pack01.</h1>")).start(Pack01Application.class, args);
     }
 
 }
